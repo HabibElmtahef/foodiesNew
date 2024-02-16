@@ -1,5 +1,4 @@
 "use client"
-
 import BreadCrumb from "@/components/breadcrumb";
 import OffeTable from "@/components/tables/offre-table/OffeTable";
 import { UserClient } from "@/components/tables/user-tables/client";
