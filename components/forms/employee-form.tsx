@@ -75,7 +75,6 @@ export const EmployeeForm: React.FC<ProductFormProps> = ({
         name: "",
         description: "",
         price: 0,
-        imgUrl: [],
         category: "",
       };
 
@@ -124,8 +123,7 @@ export const EmployeeForm: React.FC<ProductFormProps> = ({
     }
   };
 
-  const triggerImgUrlValidation = () => form.trigger("imgUrl");
-
+  
   return (
     <>
       {/* <AlertModal
@@ -155,7 +153,7 @@ export const EmployeeForm: React.FC<ProductFormProps> = ({
         >
           <FormField
             control={form.control}
-            name="imgUrl"
+            name=""
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Images</FormLabel>

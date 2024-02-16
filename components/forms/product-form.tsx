@@ -127,7 +127,6 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         name: "",
         description: "",
         price: 0,
-        imgUrl: [],
         category: "",
         offre: "1",
         items: [],
@@ -180,8 +179,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     }
   };
 
-  const triggerImgUrlValidation = () => form.trigger("imgUrl");
-
+  
   return (
     <>
       {/* <AlertModal
