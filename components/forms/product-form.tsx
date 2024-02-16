@@ -25,7 +25,9 @@ import { Heading } from "@/components/ui/heading";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -41,12 +43,25 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { cn } from "@/lib/utils";
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import { Textarea } from "../ui/textarea";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Badge } from "../ui/badge";
+import { Label } from "../ui/label";
+
+const heures = ['01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00', '00:00']
+const jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
 
 
 const offres = [
@@ -116,6 +131,64 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   })
   const [loading, setLoading] = useState(false);
   const [imgLoading, setImgLoading] = useState(false);
+  const [hinp, setHinp] = useState({
+    jour: "",
+    start: "",
+    end: ""
+  })
+  const [happyHours, setHappyHours] = useState([
+    {
+      jour: 'Lundi',
+      heures: {
+        start: null,
+        end: null
+      }
+    },
+    {
+      jour: 'Mardi',
+      heures: {
+        start: null,
+        end: null
+      }
+    },
+    {
+      jour: 'Merecredi',
+      heures: {
+        start: null,
+        end: null
+      }
+    },
+    {
+      jour: 'Jeudi',
+      heures: {
+        start: null,
+        end: null
+      }
+    },
+    {
+      jour: 'Vendredi',
+      heures: {
+        start: null,
+        end: null
+      }
+    },
+    {
+      jour: 'Samedi',
+      heures: {
+        start: null,
+        end: null
+      }
+    },
+    {
+      jour: 'Dimanche',
+      heures: {
+        start: null,
+        end: null
+      }
+    },
+  ])
+
+
   const title = initialData ? "Edit product" : "Nouveau Offre";
   const description = initialData ? "Edit a product." : "Les informations de l'offre";
   const toastMessage = initialData ? "Product updated." : "Product created.";
@@ -181,7 +254,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
   
   return (
-    <>
+    <Dialog>
       {/* <AlertModal
         isOpen={open}
         onClose={() => setOpen(false)}
@@ -733,6 +806,116 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             />
             </div>
            }
+           {
+            form.watch('offre') === '5' &&
+            <div className='w-[81vw]' >
+       <FormItem>
+                  <FormLabel>Montant de la remise (en %):</FormLabel>
+                  <FormControl>
+                    <Input
+                    type="number"
+                      disabled={loading}
+                      placeholder="Montant de la remise (en %):"
+                      className="w-1/3"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+       
+          <div className='w-[81vw] my-5'  >
+          <div className='flex flex-col md:flex-row md:space-x-10 items-center' >
+        <Label className='' > * Sélectionnez les jours et les plages horaires où le Happy Hour s'applique</Label>
+        <DialogTrigger asChild>
+        <Button>Sélectionner les heures </Button>
+        </DialogTrigger>
+       </div>
+          </div>
+          
+          <div
+          className='flex flex-row items-center'
+          >
+          <div className='w-24' ></div>
+          <div className='flex-1' >
+         <div className='grid grid-cols-24 gap-1' >
+         {heures.map((column, id) => (
+          <div key={id} className="col-span-1 text-xs font-light">
+            {column}
+          </div>
+        ))}
+         </div>
+          </div>
+          </div>
+          {
+          happyHours.map((h, i) => (
+            <div
+          className='flex flex-row items-center mb-3' key={i}
+          >
+          <div className='w-24' >
+            <p> {h.jour} </p>
+          </div>
+          <div className='flex-1' >
+         {(h?.heures?.start !== null && h?.heures?.end !== null)
+           ?
+           <div className='grid grid-cols-24' >
+          <div className={`py-4 rounded-md bg-slate-900` } 
+          style={{
+            gridColumn: `span ${h?.heures?.length} / span ${h?.heures?.length}`,
+            gridColumnStart: h?.heures?.start,
+            //gridColumn: `span ${h?.heures?.length} / span ${h?.heures?.length}`
+          }}
+          ></div>
+          </div>
+          :
+           <div className='grid grid-cols-24' >
+          <div className='py-4 rounded-md bg-slate-200 col-span-24' ></div>
+          </div>
+         }
+         </div>
+          </div>
+          ))
+          }
+          </div>
+           }
+           {
+            form.watch('offre') === '6' &&
+            <div className="grid md:grid-cols-2 gap-8" >
+            <FormField
+              control={form.control}
+              name="remise"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>* A quelle heure souhaitez-vous démarrer l'Offre Flash? :
+</FormLabel>
+                  <FormControl>
+                    <Input
+                    type="number"
+                      disabled={loading}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="remise"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>* Choisissez la durée en heures pour l'Offre Flash :</FormLabel>
+                  <FormControl>
+                    <Input
+                    type="number"
+                      disabled={loading}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            </div>
+           }
            <Heading title="Les Conditions d'utilisation" description="" />
            <div className="grid md:grid-cols-2 gap-8" >
             <div className="flex flex-col space-y-2">
@@ -956,7 +1139,96 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             {action}
           </Button>
         </form>
+        <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Les Heures</DialogTitle>
+          <DialogDescription>
+          Sélectionnez les Jours et les Plages Horaires où le Happy Hour s'applique
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="">
+              Jour
+            </Label>
+            <div className="col-span-3" >
+            <Select onValueChange={val => setHinp({...hinp, jour: val})} >
+      <SelectTrigger>
+        <SelectValue placeholder="Select" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Select</SelectLabel>
+        {
+        jours.map((j: any, i: any) => (
+          <SelectItem key={i} value={j} > {j} </SelectItem>
+        ))
+        }
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+    </div>
+
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="">
+              debut
+            </Label>
+            <div className="col-span-3" >
+            <Select onValueChange={val => setHinp({...hinp, start: parseInt(val?.split(':')[0], 10)})} >
+      <SelectTrigger>
+        <SelectValue placeholder="Select" />
+      </SelectTrigger>
+      <SelectContent position="item-aligned" sideOffset={5}>
+        <SelectGroup>
+          <SelectLabel>Select</SelectLabel>
+        {
+        heures.map((j: any, i: any) => (
+          <SelectItem key={i} value={j} > {j} </SelectItem>
+        ))
+        }
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+    </div>
+
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="">
+              fin
+            </Label>
+            <div className="col-span-3" >
+            <Select onValueChange={val => setHinp({...hinp, end: parseInt(val?.split(':')[0], 10)})} >
+      <SelectTrigger>
+        <SelectValue placeholder="Select" />
+      </SelectTrigger>
+      <SelectContent position="item-aligned" sideOffset={5}>
+        <SelectGroup>
+          <SelectLabel>Select</SelectLabel>
+        {
+        heures.map((j: any, i: any) => (
+          <SelectItem key={i} value={j} > {j} </SelectItem>
+        ))
+        }
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+    </div>
+
+          </div>
+        </div>
+        <DialogFooter>
+          <Button 
+          onClick={()=> {
+            setHappyHours(happyHours.map(h => h.jour === hinp.jour ? 
+              {...h, heures: {start: hinp.start, end: hinp.end, length: hinp.end-hinp.start}} : h))
+              console.log(happyHours)
+             // close()
+          }}
+          >Save changes</Button>
+        </DialogFooter>
+      </DialogContent>
       </Form>
-    </>
+    </Dialog>
   );
 };
