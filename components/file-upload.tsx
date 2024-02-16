@@ -4,7 +4,7 @@ import { UploadDropzone } from "@uploadthing/react";
 import { Trash } from "lucide-react";
 import Image from "next/image";
 import { UploadFileResponse } from "uploadthing/client";
-import { IMG_MAX_LIMIT } from "./forms/product-form";
+//import { IMG_MAX_LIMIT } from "./forms/product-form";
 import { Button } from "./ui/button";
 import { useToast } from "./ui/use-toast";
 
@@ -59,7 +59,7 @@ export default function FileUpload({
           ))}
       </div>
       <div>
-        {value.length < IMG_MAX_LIMIT && (
+        {(
           <UploadDropzone<OurFileRouter>
             className="dark:bg-zinc-800 py-2 ut-label:text-sm ut-allowed-content:ut-uploading:text-red-300"
             endpoint="imageUploader"
