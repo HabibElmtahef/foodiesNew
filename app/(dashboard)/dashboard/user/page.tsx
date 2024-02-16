@@ -10,7 +10,7 @@ import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const breadcrumbItems = [{ title: "Les Offres", link: "/dashboard/offres" }];
-export default function page() {
+export default function Page() {
   const router = useRouter()
   return (
     <>
