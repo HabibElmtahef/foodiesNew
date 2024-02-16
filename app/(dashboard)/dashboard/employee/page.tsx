@@ -40,7 +40,7 @@ export default async function page({ searchParams }: paramsProps) {
         <div className="flex items-start justify-between">
           <Heading
             title={`Notifications (${totalUsers})`}
-            
+            description=""
           />
 
           

@@ -735,7 +735,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             />
             </div>
            }
-           <Heading title="Les Conditions d'utilisation" />
+           <Heading title="Les Conditions d'utilisation" description="" />
            <div className="grid md:grid-cols-2 gap-8" >
             <div className="flex flex-col space-y-2">
             <span className="text-sm">* Choisissez la durée, en jours, pendant laquelle vous souhaitez que votre offre soit affichée :</span>
