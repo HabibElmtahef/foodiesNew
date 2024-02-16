@@ -307,7 +307,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
               &&
               <FormField
           control={form.control}
-          name="language"
+          name="offre"
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <FormLabel>Buy 1 Options: *</FormLabel>
@@ -369,7 +369,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
               &&
               <FormField
           control={form.control}
-          name="language"
+          name="offre"
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <FormLabel>Get 1 Options: *</FormLabel>
@@ -491,7 +491,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           &&
           <FormField
           control={form.control}
-          name="language"
+          name="offre"
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <Popover>
